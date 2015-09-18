@@ -9,15 +9,16 @@ gtthreads library.  A simple round-robin queue should be used.
 */
 
 #include "gtthread.h"
-
+#include <stdio.h>
+#include <signal.h>
+#include <stdlib.h>
 /* 
    Students should define global variables and helper functions as
    they see fit.
  */
 
-
-
-
+static steque_t queue;
+extern ucontext_t uctx_main;
 
 
 /*
@@ -49,7 +50,17 @@ void gtthread_init(long period){
 int gtthread_create(gtthread_t *thread,
         void *(*start_routine)(void *),
         void *arg){
+  if (getcontext(&(thread->gtthread_context)) == -1)
+  {
+    perror("getcontext");
+  }
 
+  thread->gtthread_context.uc_stack.ss_sp = (char*) malloc(SIGSTKSZ);
+  thread->gtthread_context.uc_stack.ss_size = SIGSTKSZ;
+  thread->gtthread_context.uc_link = &uctx_main;
+
+  makecontext(&(thread->gtthread_context), (void *)start_routine, 1, arg);
+  swapcontext(&uctx_main, &(thread->gtthread_context));
 }
 
 /*

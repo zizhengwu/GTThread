@@ -3,10 +3,12 @@
   Federer returns control to Nadal, who returns control back to Federer....
  */
 
+#define _XOPEN_SOURCE 600
 #include <ucontext.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 
 static ucontext_t uctx_federer, uctx_nadal;
 

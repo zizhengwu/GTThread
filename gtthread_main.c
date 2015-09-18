@@ -4,6 +4,7 @@
 
 /* Tests creation.
    Should print "Hello World!" */
+ucontext_t uctx_main;
 
 void *thr1(void *in) {
   printf("Hello World!\n");
