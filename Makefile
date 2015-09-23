@@ -1,5 +1,5 @@
 CC = gcc            # default is CC = cc
-CFLAGS = -g -Wall   # default is CFLAGS = [blank]
+CFLAGS = -g -Wall -Wno-return-type	# default is CFLAGS = [blank]
 
 GTTHREADS_SRC = gtthread_sched.c gtthread_mutex.c steque.c
 GTTHREADS_OBJ = $(patsubst %.c,%.o,$(GTTHREADS_SRC))

@@ -19,7 +19,8 @@ gtthreads library.  The locks can be implemented with a simple queue.
   PTHREAD_MUTEX_INITIALIZER.
  */
 int gtthread_mutex_init(gtthread_mutex_t* mutex){
-
+  mutex->status = 0;
+  return 0;
 }
 
 /*
@@ -27,6 +28,16 @@ int gtthread_mutex_init(gtthread_mutex_t* mutex){
   Returns zero on success.
  */
 int gtthread_mutex_lock(gtthread_mutex_t* mutex){
+  if (mutex->status == 0)
+  {
+    mutex->status = 1;
+    return 0;
+  }
+  else
+  {
+    while(mutex->status == 0);
+    return 0;
+  }
 
 }
 
@@ -35,7 +46,8 @@ int gtthread_mutex_lock(gtthread_mutex_t* mutex){
   Returns zero on success.
  */
 int gtthread_mutex_unlock(gtthread_mutex_t *mutex){
-
+  mutex->status = 0;
+  return 0;
 }
 
 /*
