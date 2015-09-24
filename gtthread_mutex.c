@@ -35,10 +35,10 @@ int gtthread_mutex_lock(gtthread_mutex_t* mutex){
   }
   else
   {
-    while(mutex->status == 0);
+    while(mutex->status == 1);
+    mutex->status = 1;
     return 0;
   }
-
 }
 
 /*
@@ -55,5 +55,5 @@ int gtthread_mutex_unlock(gtthread_mutex_t *mutex){
   pthread_mutex_destroy and frees any resourcs associated with the mutex.
 */
 int gtthread_mutex_destroy(gtthread_mutex_t *mutex){
-
+  return 0;
 }
