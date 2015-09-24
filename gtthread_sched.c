@@ -192,12 +192,16 @@ int gtthread_join(gtthread_t thread_copy, void **status){
     steque_cycle(&queue);
   }
   sigprocmask(SIG_UNBLOCK, &vtalrm, NULL);
-  if (!found && status != NULL)
+  if (!found)
   {
-    if (thread->exited && thread->retval != NULL)
-      *status = thread_copy.retval;
-    else if (!thread->exited)
-      *status = thread_copy.return_value;
+    fprintf(stderr, "not found in queue. already finished.\n");
+    if (status != NULL)
+    {
+      if (thread->exited && thread->retval != NULL)
+        *status = thread_copy.retval;
+      else if (!thread->exited)
+        *status = thread_copy.return_value;
+    }
     return 0;
   }
 
