@@ -1,6 +1,9 @@
 #Project 1 - GTThreads
 Zizheng Wu
 ----------------------
+
+[![Build Status](https://travis-ci.org/zizhengwu/GTThreads.svg)](https://travis-ci.org/zizhengwu/GTThreads)
+
 The code is submitted via Udacity. It passed all tests.  
 
 # What Linux platform do you use?
